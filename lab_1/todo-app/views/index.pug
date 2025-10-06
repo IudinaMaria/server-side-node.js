@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .toolbar
+    form(method="get" action="/")
+      label(for="status") Фильтр:
+      select#status(name="status" onchange="this.form.submit()")
+        option(value="all" selected=status==='all') Все задачи
+        option(value="active" selected=status==='active') Активные
+        option(value="completed" selected=status==='completed') Выполненные
+
+  if todos.length
+    ul.todo-list
+      each t in todos
+        li(class=t.completed?'done':'')
+          form(method="post" action=`/${t.id}/toggle`)
+            button(type="submit" title="Переключить статус") ✔
+          span.title= t.title
+          if t.completed
+            span.badge Выполнена
+          form(method="post" action=`/${t.id}/delete` onsubmit="return confirm('Удалить задачу?');")
+            button(type="submit" class="danger" title="Удалить") ✖
+  else
+    p.empty Ничего не найдено.
+
+  p
+    a.button(href="/new") + Добавить задачу

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h2 Новая задача
+  if error
+    p.error= error
+  form(method="post" action="/new" class="card")
+    label(for="title") Название
+    input#title(type="text" name="title" placeholder="Например: Выучить Pug" required)
+    button(type="submit") Создать
