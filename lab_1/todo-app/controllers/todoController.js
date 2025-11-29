@@ -1,28 +1,29 @@
-import * as Todo from '../models/todo.js';
+const Todo = require("../models/todo");
 
-export function listTodos(req, res) {
-  const { status } = req.query;
-  const filtered = Todo.list(status);
-  res.render('index', { todos: filtered, status: status || 'all' });
-}
+exports.index = (req, res) => {
+    const status = req.query.status || "all";
+    const todos = Todo.getAll(status);
+    res.render("index", { todos, status });
+};
 
-export function createTodo(req, res) {
-  const title = (req.body.title || '').trim();
-  if (!title) {
-    return res.status(400).render('new', { error: 'Введите название задачи.' });
-  }
-  Todo.create(title);
-  res.redirect('/');
-}
+exports.newForm = (req, res) => {
+    res.render("new");
+};
 
-export function toggleTodo(req, res) {
-  const id = Number(req.params.id);
-  Todo.toggle(id);
-  res.redirect('back');
-}
+exports.create = (req, res) => {
+    const { title } = req.body;
+    if (title.trim().length > 0) {
+        Todo.create(title);
+    }
+    res.redirect("/");
+};
 
-export function deleteTodo(req, res) {
-  const id = Number(req.params.id);
-  Todo.remove(id);
-  res.redirect('back');
-}
+exports.toggle = (req, res) => {
+    Todo.toggle(Number(req.params.id));
+    res.redirect("/");
+};
+
+exports.delete = (req, res) => {
+    Todo.delete(Number(req.params.id));
+    res.redirect("/");
+};

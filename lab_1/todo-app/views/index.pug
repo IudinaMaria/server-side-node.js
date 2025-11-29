@@ -1,27 +1,22 @@
 extends layout
 
 block content
-  .toolbar
-    form(method="get" action="/")
-      label(for="status") Фильтр:
-      select#status(name="status" onchange="this.form.submit()")
-        option(value="all" selected=status==='all') Все задачи
-        option(value="active" selected=status==='active') Активные
-        option(value="completed" selected=status==='completed') Выполненные
+  h2 Список задач
 
-  if todos.length
-    ul.todo-list
-      each t in todos
-        li(class=t.completed?'done':'')
-          form(method="post" action=`/${t.id}/toggle`)
-            button(type="submit" title="Переключить статус") ✔
-          span.title= t.title
-          if t.completed
-            span.badge Выполнена
-          form(method="post" action=`/${t.id}/delete` onsubmit="return confirm('Удалить задачу?');")
-            button(type="submit" class="danger" title="Удалить") ✖
-  else
-    p.empty Ничего не найдено.
+  form(method="GET", action="/")
+    select(name="status", onchange="this.form.submit()")
+      option(value="all" selected=status=='all') Все
+      option(value="active" selected=status=='active') Активные
+      option(value="completed" selected=status=='completed') Выполненные
 
-  p
-    a.button(href="/new") + Добавить задачу
+  ul
+    each todo in todos
+      li
+        form(action=`/${todo.id}/toggle`, method="POST", style="display:inline")
+          button(type="submit") #{todo.completed ? "✓" : "○"}
+
+        span(style=`text-decoration: ${todo.completed ? "line-through" : "none"}`)
+          | #{todo.title}
+
+        form(action=`/${todo.id}/delete`, method="POST", style="display:inline")
+          button(type="submit") Удалить

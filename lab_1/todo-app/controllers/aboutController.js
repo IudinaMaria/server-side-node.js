@@ -1,3 +1,3 @@
-export function renderAbout(req, res) {
-  res.render('about');
-}
+exports.about = (req, res) => {
+    res.render("about");
+};

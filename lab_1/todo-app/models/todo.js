@@ -1,26 +1,28 @@
-let seq = 3;
+let todos = [];
+let idCounter = 1;
 
-let store = [
-  { id: 1, title: 'Купить хлеб', completed: false },
-  { id: 2, title: 'Сделать ToDo App', completed: true },
-  { id: 3, title: 'Позвонить врачу', completed: false }
-];
+module.exports = {
+    getAll(status) {
+        if (!status || status === "all") return todos;
+        if (status === "active") return todos.filter(t => !t.completed);
+        if (status === "completed") return todos.filter(t => t.completed);
+        return todos;
+    },
 
-export function list(status = 'all') {
-  if (status === 'active') return store.filter(t => !t.completed);
-  if (status === 'completed') return store.filter(t => t.completed);
-  return [...store];
-}
+    create(title) {
+        todos.push({
+            id: idCounter++,
+            title,
+            completed: false,
+        });
+    },
 
-export function create(title) {
-  store.push({ id: ++seq, title, completed: false });
-}
+    toggle(id) {
+        const task = todos.find(t => t.id === id);
+        if (task) task.completed = !task.completed;
+    },
 
-export function toggle(id) {
-  const idx = store.findIndex(t => t.id === id);
-  if (idx >= 0) store[idx].completed = !store[idx].completed;
-}
-
-export function remove(id) {
-  store = store.filter(t => t.id !== id);
-}
+    delete(id) {
+        todos = todos.filter(t => t.id !== id);
+    }
+};
