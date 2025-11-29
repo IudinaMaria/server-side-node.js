@@ -251,13 +251,13 @@ block content
 | Фильтрация по статусу | ✔ GET /?status=active completed |
 
 ## Контрольные вопросы
-**1. Чем отличаются HTML-маршруты от REST API?**
+**1. Чем отличаются HTML-маршруты от REST API?**<br>
 HTML-маршруты возвращают готовые страницы (`res.render`), REST API — данные в JSON (`res.json`).
-HTML используется браузером, API — фронтендом/мобилкой.
-**2. Что такое res.render и res.json?**
+HTML используется браузером, API — фронтендом/мобилкой.<br>
+**2. Что такое res.render и res.json?**<br>
 `res.render(view, data)` → отрисовывает шаблон и возвращает HTML.
 `res.json(obj)` → возвращает JSON.
-`render` — для страниц, `json` — для API.
-**3. Что такое middleware и для чего нужен express.urlencoded?**
+`render` — для страниц, `json` — для API.<br>
+**3. Что такое middleware и для чего нужен express.urlencoded?**<br>
 Middleware — промежуточная обработка запроса.
 `express.urlencoded()` парсит данные HTML-форм и делает их доступными через `req.body`.
