@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title Todo List
+    link(rel="stylesheet", href="/styles.css")
+  body
+    header
+      h1 Todo List
+      nav
+        a(href="/") Список
+        |  |
+        a(href="/new") Новая задача
+        |  |
+        a(href="/about") О нас
+        |  |
+        if !user
+          a(href="/login") Войти
+          |  |
+          a(href="/register") Регистрация
+        else
+          a(href="/logout") Выйти
+
+    main
+      block content
+
+    footer
+      p © 2025 TodoApp
