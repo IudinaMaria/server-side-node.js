@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  if !user
+    p Чтобы увидеть задачи — войдите.
+    a(href="/login") Войти
+    a(href="/register") Регистрация
+  else
+    h2 Ваши задачи
+
+    form(method="GET", action="/")
+      select(name="status")
+        option(value="all" selected=status=="all") Все
+        option(value="active" selected=status=="active") Активные
+        option(value="completed" selected=status=="completed") Выполненные
+      button(type="submit") Фильтр
+
+    if todos && todos.length
+      ul
+        each t in todos
+          li
+            form(action=`/${t.id}/toggle`, method="POST", style="display:inline")
+              button(type="submit") #{t.completed ? "✓" : "○"}
+
+            | #{t.title}
+
+            form(action=`/${t.id}/delete`, method="POST", style="display:inline")
+              button(type="submit") удалить
+    else
+      p Нет задач

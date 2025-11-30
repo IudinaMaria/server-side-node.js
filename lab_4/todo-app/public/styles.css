@@ -1,0 +1,28 @@
+:root { font-family: system-ui, Arial, sans-serif; }
+body { margin: 0; background: #f6f7fb; color: #222; }
+.container { max-width: 800px; margin: 0 auto; padding: 16px; }
+header .container { display: flex; align-items: center; gap: 16px; }
+nav a { margin-right: 12px; text-decoration: none; color: #0366d6; }
+nav a:hover { text-decoration: underline; }
+
+.toolbar { margin: 12px 0 16px; }
+select { padding: 6px 8px; }
+
+.todo-list { list-style: none; padding: 0; margin: 0; }
+.todo-list li { display: flex; align-items: center; gap: 10px; background: #fff; margin-bottom: 8px; padding: 10px 12px; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.todo-list li.done .title { text-decoration: line-through; color: #888; }
+.todo-list form { display: inline; }
+.todo-list button { border: 0; background: #ebedf0; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+.todo-list button:hover { filter: brightness(0.95); }
+.todo-list button.danger { background: #ffdddd; }
+
+.badge { background: #e6ffed; color: #087f23; padding: 2px 8px; border-radius: 999px; font-size: 12px; margin-left: auto; }
+
+.button { display: inline-block; background: #0366d6; color: white; padding: 8px 12px; border-radius: 8px; text-decoration: none; }
+.button:hover { background: #024ea6; }
+
+.card { background: #fff; padding: 16px; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.06); display: grid; gap: 8px; max-width: 520px; }
+input[type="text"] { padding: 8px 10px; border-radius: 8px; border: 1px solid #dde1e6; }
+.error { color: #b00020; }
+.empty { color: #666; }
+footer { color: #666; }

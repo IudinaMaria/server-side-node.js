@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 Новая задача
+
+  form(action="/new" method="POST")
+    input(type="text" name="title" placeholder="Название" required)
+    button(type="submit") Создать
